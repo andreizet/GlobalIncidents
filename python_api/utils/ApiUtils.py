@@ -10,6 +10,9 @@ class ApiUtils:
     @staticmethod
     def get_query_cond(a_param, a_default, a_col_name, search):
         value = ApiUtils.get_param(a_param, a_default)
+        if a_param is "limit":
+            return " limit " + value
+
         if value is not None:
             if search is False:
                 return " and " + a_col_name + "=" + value

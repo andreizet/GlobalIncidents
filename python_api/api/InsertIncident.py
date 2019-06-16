@@ -5,7 +5,7 @@ from utils.ApiUtils import ApiUtils
 
 
 class InsertIncident(BaseApiCall):
-    PARAMS = {"title": 10, "description": None, "lat": None, "lng": None, "priority": None}
+    PARAMS = {"title": None, "description": None, "lat": None, "lng": None, "priority": None}
 
     title = None
     description = None

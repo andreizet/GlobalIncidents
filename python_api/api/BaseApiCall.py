@@ -6,7 +6,7 @@ class BaseApiCall(Resource):
     def get(self):
         self.get_parameters()
         result = self.get_results()
-        return json.dumps(result)
+        return result
 
     def get_parameters(self):
         pass

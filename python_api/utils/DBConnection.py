@@ -22,7 +22,7 @@ class DBConnection:
 
     @staticmethod
     def execute_query(a_query):
-        cursor = DBConnection.get_instance().cursor()
+        cursor = DBConnection.get_instance().cursor(dictionary=True)
         cursor.execute(a_query)
         results = cursor.fetchall()
         cursor.close()

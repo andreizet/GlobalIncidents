@@ -47,5 +47,7 @@ class GetIncidents(BaseApiCall):
         if self.max_lng is not None:
             max_lng_clause = " and lng <= " + self.max_lng
 
-        return DBConnection.execute_query("select id, title, description, DATE_FORMAT(published_date, \"%M %d %Y\")"
-                                          " from incidents where 1 " + filter_clause + min_lat_clause + max_lat_clause + limit_clause)
+        return DBConnection.execute_query("select id, title, description, DATE_FORMAT(published_date, \"%M %d %Y\") "
+                                          + "as published_date from incidents where 1 " + filter_clause + min_lat_clause
+                                          + max_lat_clause + min_lng_clause + max_lng_clause + limit_clause)
+
