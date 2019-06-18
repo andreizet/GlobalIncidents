@@ -1,0 +1,7 @@
+python_api/.idea/
+kotlin_api/.idea/
+kotlin_api/.gradle/
+kotlin_api/build/
+java_api/.idea/
+java_api/.gradle/
+java_api/build/

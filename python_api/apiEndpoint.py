@@ -10,7 +10,7 @@ api = Api(app)
 
 api.add_resource(GetIncidents, '/get-incidents')
 api.add_resource(GetItem, '/get-item')
-api.add_resource(InsertIncident, '/insert-incidents')
+api.add_resource(InsertIncident, '/insert-incident')
 api.add_resource(UpdateStatus, '/update-status')
 
 if __name__ == '__main__':
