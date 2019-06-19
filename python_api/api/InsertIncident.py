@@ -2,11 +2,10 @@ from api.BaseApiCall import BaseApiCall
 from flask import request
 from utils.DBConnection import DBConnection
 from utils.ApiUtils import ApiUtils
+from utils.Constants import Constants
 
 
 class InsertIncident(BaseApiCall):
-    PARAMS = {"title": None, "description": None, "lat": None, "lng": None, "priority": None}
-
     title = None
     description = None
     lat = None
@@ -14,11 +13,11 @@ class InsertIncident(BaseApiCall):
     priority = None
 
     def get_parameters(self):
-        self.title = ApiUtils.get_param(request.args.get("title"), self.PARAMS["title"])
-        self.description = ApiUtils.get_param(request.args.get("description"), self.PARAMS["description"])
-        self.lat = ApiUtils.get_param(request.args.get("lat"), self.PARAMS["lat"])
-        self.lng = ApiUtils.get_param(request.args.get("lng"), self.PARAMS["lng"])
-        self.priority = ApiUtils.get_param(request.args.get("priority"), self.PARAMS["priority"])
+        self.title = ApiUtils.get_param(request.args, Constants.API_TITLE)
+        self.description = ApiUtils.get_param(request.args, Constants.API_DESCRIPTION)
+        self.lat = ApiUtils.get_param(request.args, Constants.API_LAT)
+        self.lng = ApiUtils.get_param(request.args, Constants.API_LNG)
+        self.priority = ApiUtils.get_param(request.args, Constants.API_PRIORITY)
 
     def get_results(self):
         if self.title is None or self.description is None or self.lat is None or self.lng is None or self.priority is None:

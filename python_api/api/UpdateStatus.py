@@ -2,17 +2,16 @@ from api.BaseApiCall import BaseApiCall
 from flask import request
 from utils.DBConnection import DBConnection
 from utils.ApiUtils import ApiUtils
+from utils.Constants import Constants
 
 
 class UpdateStatus(BaseApiCall):
-    PARAMS = {"id": None, "status": None}
-
     id = None
     status = None
 
     def get_parameters(self):
-        self.id = ApiUtils.get_param(request.args.get("id"), self.PARAMS["id"])
-        self.status = ApiUtils.get_param(request.args.get("status"), self.PARAMS["status"])
+        self.id = ApiUtils.get_param(request.args, Constants.API_ID)
+        self.status = ApiUtils.get_param(request.args, Constants.API_STATUS)
 
     def get_results(self):
         if self.id is None or self.status is None:

@@ -2,25 +2,24 @@ from api.BaseApiCall import BaseApiCall
 from flask import request
 from utils.DBConnection import DBConnection
 from utils.ApiUtils import ApiUtils
+from utils.Constants import Constants
 
 
 class GetIncidents(BaseApiCall):
-    PARAMS = {"limit": 10, "filter": None, "min_lat": None, "max_lat": None, "min_lng": None, "max_lng": None}
-
-    limit = 10
-    filter = None
-    min_lat = None
-    max_lat = None
-    min_lng = None
-    max_lng = None
+    limit = Constants.API_LIMIT['default']
+    filter = Constants.API_FILTER['default']
+    min_lat = Constants.API_MIN_LAT['default']
+    max_lat = Constants.API_MAX_LAT['default']
+    min_lng = Constants.API_MIN_LNG['default']
+    max_lng = Constants.API_MAX_LNG['default']
 
     def get_parameters(self):
-        self.limit = ApiUtils.get_param(request.args.get("limit"), self.PARAMS["limit"])
-        self.filter = ApiUtils.get_param(request.args.get("filter"), self.PARAMS["filter"])
-        self.min_lat = ApiUtils.get_param(request.args.get("min_lat"), self.PARAMS["min_lat"])
-        self.max_lat = ApiUtils.get_param(request.args.get("max_lat"), self.PARAMS["max_lat"])
-        self.min_lng = ApiUtils.get_param(request.args.get("min_lng"), self.PARAMS["min_lng"])
-        self.max_lng = ApiUtils.get_param(request.args.get("max_lng"), self.PARAMS["max_lng"])
+        self.limit = ApiUtils.get_param(request.args, Constants.API_LIMIT)
+        self.filter = ApiUtils.get_param(request.args, Constants.API_FILTER)
+        self.min_lat = ApiUtils.get_param(request.args, Constants.API_MIN_LAT)
+        self.max_lat = ApiUtils.get_param(request.args, Constants.API_MAX_LAT)
+        self.min_lng = ApiUtils.get_param(request.args, Constants.API_MIN_LNG)
+        self.max_lng = ApiUtils.get_param(request.args, Constants.API_MAX_LNG)
 
     def get_results(self):
         limit_clause = ""

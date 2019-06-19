@@ -2,15 +2,14 @@ from api.BaseApiCall import BaseApiCall
 from flask import request
 from utils.DBConnection import DBConnection
 from utils.ApiUtils import ApiUtils
+from utils.Constants import Constants
 
 
 class GetItem(BaseApiCall):
-    PARAMS = {"id": None}
-
     id = None
 
     def get_parameters(self):
-        self.id = ApiUtils.get_param(request.args.get("id"), self.PARAMS["id"])
+        self.id = ApiUtils.get_param(request.args, Constants.API_ID)
 
     def get_results(self):
         if self.id is None:

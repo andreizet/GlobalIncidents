@@ -1,4 +1,5 @@
 python_api/.idea/
+python_api/*/__pycache__/
 kotlin_api/.idea/
 kotlin_api/.gradle/
 kotlin_api/build/
