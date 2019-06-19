@@ -1,6 +1,5 @@
 package globalincidents.controller;
 
-import org.json.JSONArray;
 import org.json.JSONObject;
 import org.springframework.util.MultiValueMap;
 import org.springframework.web.bind.annotation.GetMapping;

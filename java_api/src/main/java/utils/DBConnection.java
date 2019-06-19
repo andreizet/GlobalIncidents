@@ -69,6 +69,8 @@ public class DBConnection {
       jsonArray.put(obj);
     }
 
+    resultSet.getStatement().close();
+
     return jsonArray;
   }
 }
