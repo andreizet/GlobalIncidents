@@ -5,12 +5,14 @@ import org.springframework.util.MultiValueMap
 import org.springframework.web.bind.annotation.GetMapping
 import org.springframework.web.bind.annotation.RequestParam
 import org.springframework.web.bind.annotation.RestController
+import utils.ApiUtils
+import utils.Constants
 import utils.DBConnection
 
 @RestController
 class UpdateStatusController : BaseController() {
-    internal var mId = -1
-    internal var mStatus = 0
+    internal var mId: Any? = Constants.API_ID.getDefault()
+    internal var mStatus: Any? = Constants.API_STATUS.getDefault()
 
     @GetMapping("/update-status")
     override fun execute(@RequestParam params: MultiValueMap<String, String>): String {
@@ -23,10 +25,7 @@ class UpdateStatusController : BaseController() {
             return obj.toString()
         }
 
-        var idClause = ""
-        if (this.mId == -1)
-            idClause = " and id=" + this.mId
-
+        val idClause = " and id=" + this.mId
         val statusClause = " status=" + this.mStatus
 
         DBConnection.executeUpdate("update incidents set $statusClause where 1 $idClause")
@@ -38,10 +37,7 @@ class UpdateStatusController : BaseController() {
     }
 
     override fun getParams(params: MultiValueMap<String, String>) {
-        if (params.getFirst("id") != null)
-            this.mId = Integer.parseInt(params.getFirst("id")!!)
-
-        if (params.getFirst("status") != null)
-            this.mStatus = Integer.parseInt(params.getFirst("status")!!)
+        this.mId = ApiUtils.getParam(Constants.API_ID, params)
+        this.mStatus = ApiUtils.getParam(Constants.API_STATUS, params)
     }
 }

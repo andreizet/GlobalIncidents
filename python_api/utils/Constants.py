@@ -6,7 +6,6 @@ class Constants:
     API_MIN_LNG = {"key": "min_lng", "default": None}
     API_MAX_LNG = {"key": "max_lng", "default": None}
     API_ID = {"key": "id", "default": None}
-
     API_TITLE = {"key": "title", "default": None}
     API_DESCRIPTION = {"key": "description", "default": None}
     API_LAT = {"key": "lat", "default": None}

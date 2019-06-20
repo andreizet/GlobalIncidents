@@ -4,16 +4,18 @@ import org.springframework.util.MultiValueMap
 import org.springframework.web.bind.annotation.GetMapping
 import org.springframework.web.bind.annotation.RequestParam
 import org.springframework.web.bind.annotation.RestController
+import utils.ApiUtils
+import utils.Constants
 import utils.DBConnection
 
 @RestController
 class GetIncidentsController: BaseController(){
-    internal var mLimit = 10
-    internal var mFilter: String? = ""
-    internal var mMinLat = -1.0
-    internal var mMaxLat = -1.0
-    internal var mMinLng = -1.0
-    internal var mMaxLng = -1.0
+    internal var mLimit: Any? = Constants.API_LIMIT.getDefault()
+    internal var mFilter: Any? = Constants.API_FILTER.getDefault()
+    internal var mMinLat: Any? = Constants.API_MIN_LAT.getDefault()
+    internal var mMaxLat: Any? = Constants.API_MAX_LAT.getDefault()
+    internal var mMinLng: Any? = Constants.API_MIN_LNG.getDefault()
+    internal var mMaxLng: Any? = Constants.API_MAX_LNG.getDefault()
 
     @GetMapping("/get-incidents")
     override fun execute(@RequestParam params: MultiValueMap<String, String>): String {
@@ -22,23 +24,23 @@ class GetIncidentsController: BaseController(){
         val limitClause = " limit " + this.mLimit
 
         var filterClause = ""
-        if (this.mFilter != null)
+        if (this.mFilter != "")
             filterClause = " and title like '%" + this.mFilter + "%' or description like '%" + this.mFilter + "%'"
 
         var minLatClause = ""
-        if (this.mMinLat != -1.0)
+        if (this.mMinLat != -1)
             minLatClause = " and lat >= " + this.mMinLat
 
         var maxLatClause = ""
-        if (this.mMaxLat != -1.0)
+        if (this.mMaxLat != -1)
             maxLatClause = " and lat <= " + this.mMaxLat
 
         var minLngClause = ""
-        if (this.mMinLng != -1.0)
+        if (this.mMinLng != -1)
             minLngClause = " and lng >= " + this.mMinLng
 
         var maxLngClause = ""
-        if (this.mMaxLng != -1.0)
+        if (this.mMaxLng != -1)
             maxLngClause = " and lng <= " + this.mMaxLng
 
         val incidents = DBConnection.executeQuery("select * from incidents where 1 $filterClause $minLatClause " +
@@ -47,22 +49,11 @@ class GetIncidentsController: BaseController(){
     }
 
     override fun getParams(params: MultiValueMap<String, String>) {
-        if (params.getFirst("limit") != null)
-            this.mLimit = Integer.parseInt(params.getFirst("limit")!!)
-
-        if (params.getFirst("filter") != "")
-            this.mFilter = params.getFirst("filter")
-
-        if (params.getFirst("min_lat") != null)
-            this.mMinLat = java.lang.Double.parseDouble(params.getFirst("min_lat")!!)
-
-        if (params.getFirst("max_lat") != null)
-            this.mMaxLat = java.lang.Double.parseDouble(params.getFirst("max_lat")!!)
-
-        if (params.getFirst("min_lng") != null)
-            this.mMinLat = java.lang.Double.parseDouble(params.getFirst("min_lng")!!)
-
-        if (params.getFirst("max_lng") != null)
-            this.mMaxLng = java.lang.Double.parseDouble(params.getFirst("max_lng")!!)
+        this.mLimit = ApiUtils.getParam(Constants.API_LIMIT, params)
+        this.mFilter = ApiUtils.getParam(Constants.API_FILTER, params)
+        this.mMinLat = ApiUtils.getParam(Constants.API_MIN_LAT, params)
+        this.mMaxLat = ApiUtils.getParam(Constants.API_MAX_LAT, params)
+        this.mMinLat = ApiUtils.getParam(Constants.API_MIN_LNG, params)
+        this.mMaxLng = ApiUtils.getParam(Constants.API_MAX_LNG, params)
     }
 }
