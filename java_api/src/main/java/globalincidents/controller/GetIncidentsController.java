@@ -5,16 +5,18 @@ import org.springframework.util.MultiValueMap;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
+import utils.ApiUtils;
+import utils.Constants;
 import utils.DBConnection;
 
 @RestController
 public class GetIncidentsController extends BaseController{
-  int mLimit = 10;
-  String mFilter = null;
-  double mMinLat = -1;
-  double mMaxLat = -1;
-  double mMinLng = -1;
-  double mMaxLng = -1;
+  private Integer mLimit = (Integer)Constants.API_LIMIT.getDefault();
+  private String mFilter = (String)Constants.API_FILTER.getDefault();
+  private double mMinLat = (Double) Constants.API_MIN_LAT.getDefault();
+  private double mMaxLat = (Double) Constants.API_MAX_LAT.getDefault();
+  private double mMinLng = (Double) Constants.API_MIN_LNG.getDefault();
+  private double mMaxLng = (Double) Constants.API_MAX_LNG.getDefault();
 
   @Override
   @GetMapping("/get-incidents")
@@ -50,23 +52,12 @@ public class GetIncidentsController extends BaseController{
 
   @Override
   public void getParams(MultiValueMap<String, String> params) {
-    if(params.getFirst("limit") != null)
-      this.mLimit = Integer.parseInt(params.getFirst("limit"));
-
-    if(params.getFirst("filter") != null)
-      this.mFilter = params.getFirst("filter");
-
-    if(params.getFirst("min_lat") != null)
-      this.mMinLat = Double.parseDouble(params.getFirst("min_lat"));
-
-    if(params.getFirst("max_lat") != null)
-      this.mMaxLat = Double.parseDouble(params.getFirst("max_lat"));
-
-    if(params.getFirst("min_lng") != null)
-      this.mMinLat = Double.parseDouble(params.getFirst("min_lng"));
-
-    if(params.getFirst("max_lng") != null)
-      this.mMaxLng = Double.parseDouble(params.getFirst("max_lng"));
+    this.mLimit = (Integer)ApiUtils.getParamString(Constants.API_LIMIT, params);
+    this.mFilter = (String)ApiUtils.getParamString(Constants.API_FILTER, params);
+    this.mMinLat = (Double)ApiUtils.getParamString(Constants.API_MIN_LAT, params);
+    this.mMaxLat = (Double)ApiUtils.getParamString(Constants.API_MAX_LAT, params);
+    this.mMinLng = (Double)ApiUtils.getParamString(Constants.API_MIN_LNG, params);
+    this.mMaxLng = (Double)ApiUtils.getParamString(Constants.API_MAX_LNG, params);
   }
 
 }

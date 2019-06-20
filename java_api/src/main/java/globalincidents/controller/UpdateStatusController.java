@@ -5,12 +5,12 @@ import org.springframework.util.MultiValueMap;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
-import utils.DBConnection;
+import utils.*;
 
 @RestController
 public class UpdateStatusController extends BaseController{
-  int mId = -1;
-  int mStatus = 0;
+  private int mId = (Integer) Constants.API_ID.getDefault();
+  private int mStatus = (Integer) Constants.API_STATUS.getDefault();
 
   @Override
   @GetMapping("/update-status")
@@ -26,8 +26,7 @@ public class UpdateStatusController extends BaseController{
     }
 
     String idClause = "";
-    if(this.mId == -1)
-      idClause = " and id=" + this.mId;
+    idClause = " and id=" + this.mId;
 
     String statusClause = " status=" + this.mStatus;
 

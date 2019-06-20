@@ -5,9 +5,7 @@ import org.springframework.util.MultiValueMap
 import org.springframework.web.bind.annotation.GetMapping
 import org.springframework.web.bind.annotation.RequestParam
 import org.springframework.web.bind.annotation.RestController
-import utils.ApiUtils
-import utils.Constants
-import utils.DBConnection
+import utils.*
 
 @RestController
 class UpdateStatusController : BaseController() {
