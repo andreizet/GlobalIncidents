@@ -6,3 +6,5 @@ kotlin_api/build/
 java_api/.idea/
 java_api/.gradle/
 java_api/build/
+web_app/.idea/
+web_app/node_modules/

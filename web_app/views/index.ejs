@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Global Incidents</title>
+    <meta name="viewport" content="initial-scale=1.0">
+    <meta charset="utf-8">
+    <style>
+        #map {
+            height: 100%;
+        }
+        html, body {
+            height: 100%;
+            margin: 0;
+            padding: 0;
+        }
+    </style>
+</head>
+<body>
+<div id="map"></div>
+<script>
+    var map;
+    function initMap() {
+        map = new google.maps.Map(document.getElementById('map'), {
+            center: {lat: 44.31464160, lng: 23.82996670},
+            zoom: 12
+        });
+
+        fetch('http://127.0.0.1:5002/get-incidents?limit=100')
+            .then(function(response) {
+                return response.json();
+            })
+            .then(function(jsonBody) {
+                console.log(JSON.stringify(jsonBody));
+                jsonBody.forEach((item) => {
+                    let marker = new google.maps.Marker({
+                        position: new google.maps.LatLng(item.lat, item.lng),
+                        map: map,
+                        title: item.title
+                    });
+
+                    let status = "Reported";
+                    let priority = "Low";
+
+                    switch(item.status)
+                    {
+                        case 1:
+                            status = "Intervation in progress";
+                            break;
+                        case 2:
+                            status = "Resolved";
+                            break;
+                    }
+
+                    switch(item.priority)
+                    {
+                        case 1:
+                            priority = "Medium";
+                            break;
+                        case 2:
+                            priority = "High";
+                            break;
+                    }
+
+                    var infowindow = new google.maps.InfoWindow({
+                        content:
+                            `<div style="padding-left: 20px; padding-right: 20px">
+                            <h1>${item.description}</h1>
+                            <h3>${item.title}</h3>
+                            <div>
+                                <ul>
+                                <li>
+                                    <p>Status: <strong>${status}</strong></p>
+                                </li>
+                                <li>
+                                    <p>Priority: <strong>${priority}</strong></p>
+                                </li>
+                                <li>
+                                    <p>Confirmations: <strong>${item.confirmations}</strong></p>
+                                </li>
+                                </ul>
+                            </div>
+                             </div>`
+                    });
+                    google.maps.event.addListener(marker, 'click', function() {
+                        infowindow.open(map,marker);
+                    });
+                    google.maps.event.addListener(map, "click", function() {
+                        infowindow.close();
+                    });
+                    marker.setMap(map);
+                });
+
+            });
+    }
+</script>
+<script src="https://maps.googleapis.com/maps/api/js?key={INSERT_API_KEY_HERE}&callback=initMap" async defer></script>
+</body>
+</html>

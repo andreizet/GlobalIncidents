@@ -1,6 +1,6 @@
 from api.BaseApiCall import BaseApiCall
 from flask import request
-from utils.DBConnection import DBConnection
+from utils.DBConnectionSingleton import DBConnection
 from utils.ApiUtils import ApiUtils
 from utils.Constants import Constants
 
