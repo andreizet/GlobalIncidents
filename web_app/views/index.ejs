@@ -30,7 +30,6 @@
                 return response.json();
             })
             .then(function(jsonBody) {
-                console.log(JSON.stringify(jsonBody));
                 jsonBody.forEach((item) => {
                     let marker = new google.maps.Marker({
                         position: new google.maps.LatLng(item.lat, item.lng),
