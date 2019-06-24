@@ -22,8 +22,11 @@ class SSHConnection:
     def execute(self, command):
         stdin, stdout, stderr = self.ssh.exec_command(command)
         to_return = stdout.readlines()
-        print(to_return)
-        print(stderr.readlines())
+        errors = stderr.readlines()
+
+        if to_return.__len__() == 0 or errors.__len__() > 0:
+            return errors
+
         return to_return
 
     def close(self):
