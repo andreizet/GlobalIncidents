@@ -16,9 +16,7 @@ public class GetItemController extends BaseController{
 
   @Override
   @GetMapping("/get-item")
-  public String execute(@RequestParam MultiValueMap<String,String> params) {
-    super.execute(params);
-
+  public String getResults(@RequestParam MultiValueMap<String,String> params) {
     if(this.mId == -1)
     {
       JSONObject obj = new JSONObject();

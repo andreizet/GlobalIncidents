@@ -14,7 +14,7 @@ public class UpdateStatusController extends BaseController{
 
   @Override
   @GetMapping("/update-status")
-  public String execute(@RequestParam MultiValueMap<String,String> params) {
+  public String getResults(@RequestParam MultiValueMap<String,String> params) {
     super.execute(params);
 
     if(this.mId == -1)

@@ -13,7 +13,7 @@ public class DBConnection {
     if (DBConnection.mInstance == null) {
       Properties connectionProps = new Properties();
       connectionProps.put("user", "root");
-      connectionProps.put("password", "");
+      connectionProps.put("password", "root");
       connectionProps.put("useJDBCCompliantTimezoneShift", "true");
       connectionProps.put("useLegacyDatetimeCode", "false");
       connectionProps.put("serverTimezone", "UTC");

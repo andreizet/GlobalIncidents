@@ -13,7 +13,7 @@ class DBConnection:
         global connection
 
         if connection is None or connection.is_connected() is False:
-            connection = mysql.connector.connect(user='root', password='',
+            connection = mysql.connector.connect(user='root', password='root',
                                                  host='localhost',
                                                  database='global_incidents')
             return connection

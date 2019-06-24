@@ -6,7 +6,7 @@ class DBConnection2:
     
     def __init__(self):
         if self.connection is None or self.connection.is_connected() is False:
-            self.connection = mysql.connector.connect(user='root', password='', host='localhost',
+            self.connection = mysql.connector.connect(user='root', password='root', host='localhost',
                                                       database='global_incidents')
 
     def execute_query(self, a_query):

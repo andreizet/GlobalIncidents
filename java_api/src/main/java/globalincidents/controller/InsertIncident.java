@@ -19,8 +19,7 @@ public class InsertIncident extends BaseController{
 
   @Override
   @GetMapping("/insert-incident")
-  public String execute(@RequestParam MultiValueMap<String,String> params) {
-    super.execute(params);
+  public String getResults(@RequestParam MultiValueMap<String,String> params) {
     if(this.mTitle == null || this.mDescription == null || mLat == -1 || mLng == -1)
     {
       JSONObject obj = new JSONObject();
