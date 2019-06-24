@@ -1,30 +1,16 @@
-import paramiko
+from deploy.SSHConnection import SSHConnection
+import platform, sys, os
 
 
-class SSHConnection:
-    ssh = None
-    host = None
-    user = None
-    password = ""
-    key = None
+USER = "ubuntu"
+INSTANCE = "ec2-34-227-66-111.compute-1.amazonaws.com"
 
-    def __init__(self, aHost, aUser, aPassword, aKey):
-        self.ssh = paramiko.SSHClient()
-        self.ssh.set_missing_host_key_policy(paramiko.AutoAddPolicy())
-        self.host = aHost
-        self.user = aUser
-        self.password = aPassword
-        self.key = aKey
+if "Windows" in platform.platform():
+    key = "C:/secure/aws_ssh"
+else:
+    key = "/home/caphyon/secure/aws_ssh"
 
-    def connect(self):
-        self.ssh.connect(self.host, username=self.user, password=self.password, key_filename=self.key)
-
-    def execute(self, command):
-        stdin, stdout, stderr = self.ssh.exec_command(command)
-        to_return = stdout.readlines()
-        print(to_return)
-        print(stderr.readlines())
-        return to_return
-
-    def close(self):
-        self.ssh.close()
+connection = SSHConnection(INSTANCE, USER, '', key)
+connection.connect()
+response = connection.execute('ls -al')
+print(response)
