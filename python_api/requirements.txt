@@ -11,6 +11,8 @@ itsdangerous==1.1.0
 Jinja2==2.10.1
 MarkupSafe==1.1.1
 mysql-connector==2.2.9
+pyinstrument==3.0.3
+pyinstrument-cext==0.2.2
 pytz==2019.1
 requests==2.22.0
 six==1.12.0

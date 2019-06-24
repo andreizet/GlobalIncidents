@@ -19,11 +19,11 @@ class UpdateStatus(BaseApiCall):
 
         id_clause = ""
         if self.id is not None:
-            id_clause = " and id=" + self.id
+            id_clause = " and id=" + str(self.id)
 
         status_clause = ""
         if self.status is not None:
-            status_clause = " status=" + self.status
+            status_clause = " status=" + str(self.status)
 
         DBConnection.execute_update("update incidents set " + status_clause + " where 1 " + id_clause)
         return {"message": "successfully updated"}

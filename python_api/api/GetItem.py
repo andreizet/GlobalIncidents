@@ -17,7 +17,7 @@ class GetItem(BaseApiCall):
 
         id_clause = ""
         if self.id is not None:
-            id_clause = " and id=" + self.id
+            id_clause = " and id=" + str(self.id)
 
         return DBConnection.execute_query("select id, title, description, DATE_FORMAT(published_date, \"%M %d %Y\") "
                                           + "as published_date" + " from incidents where 1 " + id_clause)

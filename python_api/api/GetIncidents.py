@@ -7,6 +7,7 @@ from utils.Constants import Constants
 import threading
 import time
 
+
 class GetIncidents(BaseApiCall):
     MAX_THREADS_NO = 5
 
@@ -29,7 +30,7 @@ class GetIncidents(BaseApiCall):
         start = time.time()
         limit_clause = ""
         if self.limit is not None:
-            limit_clause = "limit " + self.limit
+            limit_clause = "limit " + str(self.limit)
 
         filter_clause = ""
         if self.filter is not None:
@@ -37,19 +38,19 @@ class GetIncidents(BaseApiCall):
 
         min_lat_clause = ""
         if self.min_lat is not None:
-            min_lat_clause = " and lat >= " + self.min_lat
+            min_lat_clause = " and lat >= " + str(self.min_lat)
 
         max_lat_clause = ""
         if self.max_lat is not None:
-            max_lat_clause = " and lat <= " + self.max_lat
+            max_lat_clause = " and lat <= " + str(self.max_lat)
 
         min_lng_clause = ""
         if self.min_lng is not None:
-            min_lng_clause = " and lng >= " + self.min_lng
+            min_lng_clause = " and lng >= " + str(self.min_lng)
 
         max_lng_clause = ""
         if self.max_lng is not None:
-            max_lng_clause = " and lng <= " + self.max_lng
+            max_lng_clause = " and lng <= " + str(self.max_lng)
 
         query = "select id, title, description, DATE_FORMAT(published_date, \"%M %d %Y\") as published_date, " \
                 "CAST(lat AS CHAR) as lat, CAST(lng AS CHAR) as lng, status, confirmations, priority from incidents " \

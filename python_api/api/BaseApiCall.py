@@ -1,6 +1,6 @@
 from flask_restful import Resource
-from datetime import datetime
 import time
+
 
 class BaseApiCall(Resource):
     def get(self):
