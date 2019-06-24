@@ -52,7 +52,7 @@ public class GetIncidentsController extends BaseController{
 
   @Override
   public void getParams(MultiValueMap<String, String> params) {
-    this.mLimit = (Integer)ApiUtils.getParamString(Constants.API_LIMIT, params);
+    this.mLimit = Integer.parseInt((String)ApiUtils.getParamString(Constants.API_LIMIT, params));
     this.mFilter = (String)ApiUtils.getParamString(Constants.API_FILTER, params);
     this.mMinLat = (Double)ApiUtils.getParamString(Constants.API_MIN_LAT, params);
     this.mMaxLat = (Double)ApiUtils.getParamString(Constants.API_MAX_LAT, params);
