@@ -1,5 +1,4 @@
 from flask_restful import Resource
-import json
 
 
 class BaseApiCall(Resource):
