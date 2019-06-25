@@ -10,12 +10,13 @@ object DBConnection {
 
     init {
         val connectionProps = Properties()
-        connectionProps.put("user", "root")
-        connectionProps.put("password", "")
+        connectionProps.put("user", ConfigurationLoader.instance?.dbUser)
+        connectionProps.put("password", ConfigurationLoader.instance?.dbPass)
         try {
             Class.forName("com.mysql.jdbc.Driver").getDeclaredConstructor().newInstance()
-            mConnection = DriverManager.getConnection(
-                "jdbc:" + "mysql" + "://" + "127.0.0.1" + ":" + "3306" + "/" + "global_incidents", connectionProps)
+            mConnection = DriverManager.getConnection("jdbc:" + "mysql" + "://"
+                          + ConfigurationLoader.instance?.dbHost + ":" + "3306" + "/"
+                          + ConfigurationLoader.instance?.dbName, connectionProps)
         } catch (ex: SQLException) {
             // handle any errors
             ex.printStackTrace()

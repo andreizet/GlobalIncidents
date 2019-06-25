@@ -1,4 +1,5 @@
 import mysql.connector
+from utils.ConfigurationLoader import ConfigurationLoader
 
 connection = None
 
@@ -13,9 +14,10 @@ class DBConnection:
         global connection
 
         if connection is None or connection.is_connected() is False:
-            connection = mysql.connector.connect(user='root', password='root',
-                                                 host='localhost',
-                                                 database='global_incidents')
+            connection = mysql.connector.connect(user=ConfigurationLoader.db_user,
+                                                 password=ConfigurationLoader.db_password,
+                                                 host=ConfigurationLoader.db_host,
+                                                 database=ConfigurationLoader.db_name)
             return connection
         else:
             return connection

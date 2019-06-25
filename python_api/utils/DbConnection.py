@@ -1,4 +1,5 @@
 import mysql.connector
+from utils.ConfigurationLoader import ConfigurationLoader
 
 
 class DBConnection2:
@@ -6,8 +7,10 @@ class DBConnection2:
     
     def __init__(self):
         if self.connection is None or self.connection.is_connected() is False:
-            self.connection = mysql.connector.connect(user='root', password='root', host='localhost',
-                                                      database='global_incidents')
+            self.connection = mysql.connector.connect(user=ConfigurationLoader.db_user,
+                                                      password=ConfigurationLoader.db_password,
+                                                      host=ConfigurationLoader.db_host,
+                                                      database=ConfigurationLoader.db_name)
 
     def execute_query(self, a_query):
         cursor = self.connection.cursor(dictionary=True)

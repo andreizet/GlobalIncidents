@@ -3,6 +3,7 @@ python_api/*/__pycache__/
 kotlin_api/.idea/
 kotlin_api/.gradle/
 kotlin_api/build/
+kotlin_api/out/
 java_api/.idea/
 java_api/.gradle/
 java_api/build/

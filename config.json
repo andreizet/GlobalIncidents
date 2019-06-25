@@ -1,0 +1,9 @@
+{
+	"db_name": "ADD DB NAME HERE",
+	"db_host": "ADD DB HOST HERE",
+	"db_user": "ADD DB USER HERE",
+	"db_password": "ADD DB PASS HERE",
+	"aws_key": "ADD SSH KEY PATH HERE",
+	"aws_user": "ADD USER HERE",
+	"aws_instance": "ADD INSTANCE HERE"
+}

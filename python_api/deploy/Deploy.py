@@ -1,11 +1,11 @@
 from deploy.SSHConnection import SSHConnection
 import platform, sys, os
+from utils.ConfigurationLoader import ConfigurationLoader
 
+USER = ConfigurationLoader.aws_user
+INSTANCE = ConfigurationLoader.aws_instance
 
-USER = "ubuntu"
-INSTANCE = "ec2-34-227-66-111.compute-1.amazonaws.com"
-
-key = os.environ['AWS_KEY_PATH']
+key = ConfigurationLoader.aws_key
 
 # Alternatively, the path can be hardcoded like in the following lines, but it is not secure at all:
 # if "Windows" in platform.platform():

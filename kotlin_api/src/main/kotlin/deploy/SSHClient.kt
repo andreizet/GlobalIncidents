@@ -2,20 +2,21 @@ package deploy
 
 import com.jcraft.jsch.*
 import org.slf4j.LoggerFactory
+import utils.ConfigurationLoader
 import java.io.File
 import java.io.IOException
 
 
-class SSHClient(private val mAddress: String) {
+class SSHClient(private val mAddress: String?) {
 
     private val mLogger = LoggerFactory.getLogger(SSHClient::class.java)
     private var mSession: Session? = null
     private var mSCPChannel: Channel? = null
 
     @Throws(Exception::class)
-    fun Connect(aUsername: String, aPassword: String?) {
+    fun Connect(aUsername: String?, aPassword: String?) {
         val jsch = JSch()
-        val mKeyFilePath = "C:/secure/aws_ssh"
+        val mKeyFilePath = ConfigurationLoader.instance?.awsKey
         if (mKeyFilePath != null) {
             val keyFile = File(mKeyFilePath)
             jsch.addIdentity(keyFile.absolutePath)

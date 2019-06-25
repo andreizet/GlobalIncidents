@@ -12,15 +12,17 @@ public class DBConnection {
   public static Connection GetInstance() {
     if (DBConnection.mInstance == null) {
       Properties connectionProps = new Properties();
-      connectionProps.put("user", "root");
-      connectionProps.put("password", "");
+      connectionProps.put("user", ConfigurationLoader.getInstance().getDBUser());
+      connectionProps.put("password", ConfigurationLoader.getInstance().getDBPass());
       connectionProps.put("useJDBCCompliantTimezoneShift", "true");
       connectionProps.put("useLegacyDatetimeCode", "false");
       connectionProps.put("serverTimezone", "UTC");
 
       try {
         Class.forName("com.mysql.cj.jdbc.Driver").getDeclaredConstructor().newInstance();
-        DBConnection.mInstance = DriverManager.getConnection("jdbc:" + "mysql" + "://" + "127.0.0.1" + ":" + "3306" + "/" + "global_incidents", connectionProps);
+        DBConnection.mInstance = DriverManager.getConnection("jdbc:" + "mysql" + "://"
+                                 + ConfigurationLoader.getInstance().getDBHost() + ":" + "3306" + "/"
+                                 + ConfigurationLoader.getInstance().getDBName(), connectionProps);
       } catch (Exception ex) {
         // handle any errors
         ex.printStackTrace();

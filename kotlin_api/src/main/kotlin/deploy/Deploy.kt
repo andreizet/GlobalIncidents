@@ -1,5 +1,6 @@
 package deploy
 
+import utils.ConfigurationLoader
 import java.io.File
 
 object Deploy {
@@ -7,8 +8,8 @@ object Deploy {
     @Throws(Exception::class)
     @JvmStatic
     fun main(args: Array<String>) {
-        val ssh = SSHClient("ec2-34-227-66-111.compute-1.amazonaws.com")
-        ssh.Connect("ubuntu", null)
+        val ssh = SSHClient(ConfigurationLoader.instance?.awsInstance)
+        ssh.Connect(ConfigurationLoader.instance?.awsUser, null)
         ssh.ConnectSCP()
 
         val jarPath = (System.getProperty("user.dir") + File.separator + "build" + File.separator + "libs"

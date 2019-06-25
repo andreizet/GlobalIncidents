@@ -6,6 +6,10 @@ from api.InsertIncident import InsertIncident
 from api.GetItem import GetItem
 from api.UpdateStatus import UpdateStatus
 from pyinstrument import Profiler
+from utils.ConfigurationLoader import ConfigurationLoader
+
+# Load configuration
+ConfigurationLoader.load()
 
 app = Flask("Global Incidents")
 CORS(app)
@@ -33,4 +37,4 @@ def after_request(response):
 
 
 if __name__ == '__main__':
-    app.run(host="0.0.0.0", port=80)
+    app.run(host="0.0.0.0", port=5002)

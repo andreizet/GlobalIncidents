@@ -1,12 +1,14 @@
 package deploy;
 
+import utils.ConfigurationLoader;
+
 import java.io.File;
 
 public class Deploy {
 
   public static void main(String[] args) throws Exception{
-    SSHClient ssh = new SSHClient("ec2-34-227-66-111.compute-1.amazonaws.com");
-    ssh.Connect("ubuntu", null);
+    SSHClient ssh = new SSHClient(ConfigurationLoader.getInstance().getAWSInstance());
+    ssh.Connect(ConfigurationLoader.getInstance().getAWSUser(), null);
     ssh.ConnectSCP();
 
     String jarPath = System.getProperty("user.dir") + File.separator + "build" + File.separator + "libs"

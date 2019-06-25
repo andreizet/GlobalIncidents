@@ -3,6 +3,7 @@ package deploy;
 import com.jcraft.jsch.*;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import utils.ConfigurationLoader;
 
 import java.io.File;
 import java.io.IOException;
@@ -25,7 +26,7 @@ public class SSHClient {
   public void Connect(String aUsername, String aPassword) throws Exception
   {
     JSch jsch = new JSch();
-    String mKeyFilePath = "C:/secure/aws_ssh";
+    String mKeyFilePath = ConfigurationLoader.getInstance().getAWSKey();
     if (mKeyFilePath != null)
     {
       File keyFile = new File(mKeyFilePath);
