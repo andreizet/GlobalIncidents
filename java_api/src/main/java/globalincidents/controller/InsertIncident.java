@@ -19,6 +19,11 @@ public class InsertIncident extends BaseController{
 
   @Override
   @GetMapping("/insert-incident")
+  public String execute(@RequestParam MultiValueMap<String,String> params) {
+    return super.execute(params);
+  }
+
+  @Override
   public String getResults(@RequestParam MultiValueMap<String,String> params) {
     if(this.mTitle == null || this.mDescription == null || mLat == -1 || mLng == -1)
     {
@@ -43,8 +48,8 @@ public class InsertIncident extends BaseController{
   public void getParams(MultiValueMap<String, String> params) {
     this.mTitle = (String) ApiUtils.getParamString(Constants.API_TITLE, params);
     this.mDescription = (String) ApiUtils.getParamString(Constants.API_DESCRIPTION, params);
-    this.mLat = (Double) ApiUtils.getParamString(Constants.API_LAT, params);
-    this.mLng = (Double) ApiUtils.getParamString(Constants.API_LNG, params);
-    this.mPriority = (Integer) ApiUtils.getParamString(Constants.API_PRIORITY, params);
+    this.mLat = Double.parseDouble((String)ApiUtils.getParamString(Constants.API_LAT, params));
+    this.mLng = Double.parseDouble((String)ApiUtils.getParamString(Constants.API_LNG, params));
+    this.mPriority = Integer.parseInt((String)ApiUtils.getParamString(Constants.API_PRIORITY, params));
   }
 }

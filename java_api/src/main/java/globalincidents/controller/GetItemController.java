@@ -16,6 +16,11 @@ public class GetItemController extends BaseController{
 
   @Override
   @GetMapping("/get-item")
+  public String execute(@RequestParam MultiValueMap<String,String> params) {
+    return super.execute(params);
+  }
+
+  @Override
   public String getResults(@RequestParam MultiValueMap<String,String> params) {
     if(this.mId == -1)
     {
@@ -31,6 +36,6 @@ public class GetItemController extends BaseController{
 
   @Override
   public void getParams(MultiValueMap<String, String> params) {
-    this.mId = (Integer) ApiUtils.getParamString(Constants.API_ID, params);
+    this.mId = Integer.parseInt((String)ApiUtils.getParamString(Constants.API_ID, params));
   }
 }

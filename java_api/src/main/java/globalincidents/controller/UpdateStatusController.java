@@ -14,6 +14,11 @@ public class UpdateStatusController extends BaseController{
 
   @Override
   @GetMapping("/update-status")
+  public String execute(@RequestParam MultiValueMap<String,String> params) {
+    return super.execute(params);
+  }
+
+  @Override
   public String getResults(@RequestParam MultiValueMap<String,String> params) {
     super.execute(params);
 
@@ -40,10 +45,7 @@ public class UpdateStatusController extends BaseController{
 
   @Override
   public void getParams(MultiValueMap<String, String> params) {
-    if(params.getFirst("id") != null)
-      this.mId = Integer.parseInt(params.getFirst("id"));
-
-    if(params.getFirst("status") != null)
-      this.mStatus = Integer.parseInt(params.getFirst("status"));
+    this.mId = Integer.parseInt((String)ApiUtils.getParamString(Constants.API_ID, params));
+    this.mStatus = Integer.parseInt((String)ApiUtils.getParamString(Constants.API_STATUS, params));
   }
 }
