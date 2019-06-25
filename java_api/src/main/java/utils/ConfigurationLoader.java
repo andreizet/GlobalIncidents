@@ -2,9 +2,7 @@ package utils;
 
 import org.json.JSONObject;
 
-import java.io.BufferedReader;
-import java.io.File;
-import java.io.FileReader;
+import java.io.*;
 
 public class ConfigurationLoader {
   private static ConfigurationLoader mInstance = null;
@@ -31,24 +29,31 @@ public class ConfigurationLoader {
     return mInstance;
   }
 
-  private ConfigurationLoader load() throws Exception{
+  private ConfigurationLoader load(){
     File file = new File(System.getProperty("ConfigPath"));
-    BufferedReader br = new BufferedReader(new FileReader(file));
+    try {
+      BufferedReader br = new BufferedReader(new FileReader(file));
 
-    String st;
-    StringBuffer sb = new StringBuffer();
-    while ((st = br.readLine()) != null)
-      sb.append(st);
+      String st;
+      StringBuffer sb = new StringBuffer();
+      while ((st = br.readLine()) != null)
+        sb.append(st);
 
-    JSONObject obj = new JSONObject(sb.toString());
+      JSONObject obj = new JSONObject(sb.toString());
 
-    this.mDBName = obj.getString("db_name");
-    this.mDBHost = obj.getString("db_host");
-    this.mDBUser = obj.getString("db_user");
-    this.mDBPass = obj.getString("db_password");
-    this.mAWSKey = obj.getString("aws_key");
-    this.mAWSUser = obj.getString("aws_user");
-    this.mAWSInstance = obj.getString("aws_instance");
+      this.mDBName = obj.getString("db_name");
+      this.mDBHost = obj.getString("db_host");
+      this.mDBUser = obj.getString("db_user");
+      this.mDBPass = obj.getString("db_password");
+      this.mAWSKey = obj.getString("aws_key");
+      this.mAWSUser = obj.getString("aws_user");
+      this.mAWSInstance = obj.getString("aws_instance");
+    }
+    catch(IOException ex) {
+      ex.printStackTrace();
+      System.out.println("The configuration file was not found");
+      return null;
+    }
 
     return this;
   }

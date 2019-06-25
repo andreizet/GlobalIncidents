@@ -62,6 +62,7 @@ tasks.getByName("bootJar") {
 //version '1.0-SNAPSHOT'
 
 task(executeDeploy, dependsOn: 'classes', type: JavaExec) {
+    systemProperties['ConfigPath'] = 'YOUR CONFIG FILE'
     group = "deploy"
     main = 'deploy.Deploy'
     classpath = sourceSets.main.runtimeClasspath
@@ -69,7 +70,6 @@ task(executeDeploy, dependsOn: 'classes', type: JavaExec) {
 
 task deploy {
     group = "deploy"
-    dependsOn("clean")
     dependsOn("bootJar")
     dependsOn("executeDeploy")
 }

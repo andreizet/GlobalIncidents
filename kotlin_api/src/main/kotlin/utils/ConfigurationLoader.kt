@@ -2,6 +2,7 @@ package utils
 
 import org.json.JSONObject
 import java.io.File
+import java.io.IOException
 
 class ConfigurationLoader {
 
@@ -21,19 +22,27 @@ class ConfigurationLoader {
         private set
 
     @Throws(Exception::class)
-    private fun load(): ConfigurationLoader {
+    private fun load(): ConfigurationLoader? {
         val file = File(System.getProperty("ConfigPath"))
-        val content = file.readText()
+        try {
+            val content = file.readText()
 
-        val obj = JSONObject(content)
+            val obj = JSONObject(content)
 
-        this.dbName = obj.getString("db_name")
-        this.dbHost = obj.getString("db_host")
-        this.dbUser = obj.getString("db_user")
-        this.dbPass = obj.getString("db_password")
-        this.awsKey = obj.getString("aws_key")
-        this.awsUser = obj.getString("aws_user")
-        this.awsInstance = obj.getString("aws_instance")
+            this.dbName = obj.getString("db_name")
+            this.dbHost = obj.getString("db_host")
+            this.dbUser = obj.getString("db_user")
+            this.dbPass = obj.getString("db_password")
+            this.awsKey = obj.getString("aws_key")
+            this.awsUser = obj.getString("aws_user")
+            this.awsInstance = obj.getString("aws_instance")
+        }
+        catch(ex: IOException){
+            ex.printStackTrace()
+            println("The configuration file was not found")
+            return null
+        }
+
 
         return this
     }
