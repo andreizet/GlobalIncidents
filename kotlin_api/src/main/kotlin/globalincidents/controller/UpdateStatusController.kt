@@ -13,7 +13,9 @@ class UpdateStatusController : BaseController() {
     internal var mStatus: Any? = Constants.API_STATUS.getDefault()
 
     @GetMapping("/update-status")
-    override fun execute(@RequestParam params: MultiValueMap<String, String>): String {
+    override fun execute(@RequestParam params: MultiValueMap<String, String>): String = super.execute(params)
+
+    override fun getResults(@RequestParam params: MultiValueMap<String, String>): String {
         super.execute(params)
 
         if (this.mId == -1) {

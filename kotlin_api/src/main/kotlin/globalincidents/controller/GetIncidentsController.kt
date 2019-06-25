@@ -18,9 +18,9 @@ class GetIncidentsController: BaseController(){
     internal var mMaxLng: Any? = Constants.API_MAX_LNG.getDefault()
 
     @GetMapping("/get-incidents")
-    override fun execute(@RequestParam params: MultiValueMap<String, String>): String {
-        super.execute(params)
+    override fun execute(@RequestParam params: MultiValueMap<String, String>): String = super.execute(params)
 
+    override fun getResults(@RequestParam params: MultiValueMap<String, String>): String {
         val limitClause = " limit " + this.mLimit
 
         var filterClause = ""

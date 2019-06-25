@@ -13,12 +13,13 @@ public abstract class BaseController {
 
   public String execute(@RequestParam MultiValueMap<String,String> params) {
     long startTime = System.currentTimeMillis();
+
     this.getParams(params);
     String response = this.getResults(params);
+
     long stopTime = System.currentTimeMillis();
 
     logger.info("Time: " + (stopTime - startTime) + "ms");
-
 
     return response;
   }

@@ -18,7 +18,9 @@ class InsertIncident : BaseController() {
     internal var mPriority: Any? = Constants.API_PRIORITY.getDefault()
 
     @GetMapping("/insert-incident")
-    override fun execute(@RequestParam params: MultiValueMap<String, String>): String {
+    override fun execute(@RequestParam params: MultiValueMap<String, String>): String = super.execute(params)
+
+    override fun getResults(@RequestParam params: MultiValueMap<String, String>): String {
         super.execute(params)
         if (this.mTitle == null || this.mDescription == null || mLat == -1 || mLng == -1)
         {

@@ -14,7 +14,9 @@ class GetItemController : BaseController() {
     internal var mId: Any? = Constants.API_ID.getDefault()
 
     @GetMapping("/get-item")
-    override fun execute(@RequestParam params: MultiValueMap<String, String>): String {
+    override fun execute(@RequestParam params: MultiValueMap<String, String>): String = super.execute(params)
+
+    override fun getResults(@RequestParam params: MultiValueMap<String, String>): String {
         super.execute(params)
 
         if(this.mId == -1)
