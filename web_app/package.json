@@ -1,0 +1,16 @@
+{
+  "name": "web_app",
+  "version": "1.0.0",
+  "description": "1. Install [NodeJS](https://nodejs.org/en/download/)\r 2. Get an API Key from [Google Cloud Platform Console](https://developers.google.com/maps/documentation/javascript/get-api-key)\r 3. Run ```npm install``` in ```web_app/```\r 4. To access the application, navigate from a browser to ```localhost:3000```",
+  "main": "server.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node server.js"
+  },
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "ejs": "^2.6.2",
+    "express": "^4.17.1"
+  }
+}
