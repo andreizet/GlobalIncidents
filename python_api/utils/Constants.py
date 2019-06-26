@@ -10,5 +10,5 @@ class Constants:
     API_DESCRIPTION = {"key": "description", "default": None}
     API_LAT = {"key": "lat", "default": None}
     API_LNG = {"key": "lng", "default": None}
-    API_PRIORITY = {"priority": "id", "default": None}
+    API_PRIORITY = {"key": "priority", "default": None}
     API_STATUS = {"key": "status", "default": None}

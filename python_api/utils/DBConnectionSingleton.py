@@ -4,7 +4,7 @@ from utils.ConfigurationLoader import ConfigurationLoader
 connection = None
 
 
-class DBConnection:
+class DBConnectionSingleton:
 
     def __init__(self):
         pass
@@ -24,7 +24,7 @@ class DBConnection:
 
     @staticmethod
     def execute_query(a_query):
-        cursor = DBConnection.get_instance().cursor(dictionary=True)
+        cursor = DBConnectionSingleton.get_instance().cursor(dictionary=True)
         cursor.execute(a_query)
         results = cursor.fetchall()
         cursor.close()
@@ -32,9 +32,9 @@ class DBConnection:
 
     @staticmethod
     def execute_update(a_query):
-        cursor = DBConnection.get_instance().cursor()
+        cursor = DBConnectionSingleton.get_instance().cursor()
         cursor.execute(a_query)
-        DBConnection.get_instance().commit()
+        DBConnectionSingleton.get_instance().commit()
         row_count = cursor.rowcount
         cursor.close()
         return row_count

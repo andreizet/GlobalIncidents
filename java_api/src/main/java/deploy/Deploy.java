@@ -25,7 +25,8 @@ public class Deploy {
     String killResponse = ssh.ExecuteCommand("sudo pkill java");
     System.out.println("Kill response: " + killResponse);
 
-    String startResponse = ssh.ExecuteCommand("sudo java -jar /home/ubuntu/global-incidents-java.jar > java_output.log &");
+    String startResponse = ssh.ExecuteCommand("sudo java -jar -DConfigPath=/home/ubuntu/config.json " +
+                                              "/home/ubuntu/global-incidents-java.jar > java_output.log &");
     System.out.println("Start response: " + startResponse);
 
     ssh.Disconnect();

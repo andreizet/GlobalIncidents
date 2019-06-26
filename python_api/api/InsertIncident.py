@@ -1,6 +1,6 @@
 from api.BaseApiCall import BaseApiCall
 from flask import request
-from utils.DBConnectionSingleton import DBConnection
+from utils.DBConnectionSingleton import DBConnectionSingleton
 from utils.ApiUtils import ApiUtils
 from utils.Constants import Constants
 
@@ -23,7 +23,7 @@ class InsertIncident(BaseApiCall):
         if self.title is None or self.description is None or self.lat is None or self.lng is None or self.priority is None:
             return {"message": "Some of the mandatory parameters are missing. Please consult our API documentation"}
 
-        DBConnection.execute_update('insert ignore into incidents (title, description, lat, lng, priority) '
+        DBConnectionSingleton.execute_update('insert ignore into incidents (title, description, lat, lng, priority) '
                                     + 'values '
                                     + '("' + self.title + '", "' + self.description + '", ' + str(self.lat) + ', '
                                     + str(self.lng) + ', ' + str(self.priority) + ')')

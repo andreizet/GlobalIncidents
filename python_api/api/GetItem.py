@@ -1,6 +1,6 @@
 from api.BaseApiCall import BaseApiCall
 from flask import request
-from utils.DBConnectionSingleton import DBConnection
+from utils.DBConnectionSingleton import DBConnectionSingleton
 from utils.ApiUtils import ApiUtils
 from utils.Constants import Constants
 
@@ -19,6 +19,6 @@ class GetItem(BaseApiCall):
         if self.id is not None:
             id_clause = " and id=" + str(self.id)
 
-        return DBConnection.execute_query("select id, title, description, DATE_FORMAT(published_date, \"%M %d %Y\") "
+        return DBConnectionSingleton.execute_query("select id, title, description, DATE_FORMAT(published_date, \"%M %d %Y\") "
                                           + "as published_date" + " from incidents where 1 " + id_clause)
 
