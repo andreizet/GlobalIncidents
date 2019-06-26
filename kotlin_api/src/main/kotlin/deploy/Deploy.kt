@@ -25,7 +25,8 @@ object Deploy {
         val responseKill: String = ssh.ExecuteCommand("sudo pkill java")
         println("Kill response: $responseKill")
 
-        val responseStart: String = ssh.ExecuteCommand("sudo java -jar /home/ubuntu/global-incidents-kotlin.jar > kotlin_output.log &")
+        val responseStart: String = ssh.ExecuteCommand("sudo java -jar -DConfigPath=/home/ubuntu/config.json " +
+                                                        "/home/ubuntu/global-incidents-kotlin.jar > kotlin_output.log &")
         println("Start response: $responseStart")
 
         ssh.Disconnect()

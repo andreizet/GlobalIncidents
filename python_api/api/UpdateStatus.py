@@ -1,6 +1,6 @@
 from api.BaseApiCall import BaseApiCall
 from flask import request
-from utils.DBConnectionSingleton import DBConnection
+from utils.DBConnectionSingleton import DBConnectionSingleton
 from utils.ApiUtils import ApiUtils
 from utils.Constants import Constants
 
@@ -25,6 +25,6 @@ class UpdateStatus(BaseApiCall):
         if self.status is not None:
             status_clause = " status=" + str(self.status)
 
-        DBConnection.execute_update("update incidents set " + status_clause + " where 1 " + id_clause)
+        DBConnectionSingleton.execute_update("update incidents set " + status_clause + " where 1 " + id_clause)
         return {"message": "successfully updated"}
 

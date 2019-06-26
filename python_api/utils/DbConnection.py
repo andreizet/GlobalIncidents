@@ -2,7 +2,7 @@ import mysql.connector
 from utils.ConfigurationLoader import ConfigurationLoader
 
 
-class DBConnection2:
+class DBConnection:
     connection = None
     
     def __init__(self):

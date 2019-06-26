@@ -2,6 +2,8 @@ from deploy.SSHConnection import SSHConnection
 import platform, sys, os
 from utils.ConfigurationLoader import ConfigurationLoader
 
+
+ConfigurationLoader.load()
 USER = ConfigurationLoader.aws_user
 INSTANCE = ConfigurationLoader.aws_instance
 
@@ -29,8 +31,8 @@ try:
     response = connection.execute('sudo pkill python3')
     print("Killing old: {}".format(response))
 
-    response = connection.execute('sudo nohup python3 /home/ubuntu/GlobalIncidents/python_api/apiEndpoint.py > '
-                                  'py_output.log &')
+    response = connection.execute('sudo nohup python3 /home/ubuntu/GlobalIncidents/python_api/apiEndpoint.py '
+                                  '/home/ubuntu/config.json > py_output.log &')
     print('Server start: {}'.format(response))
 
     print("Deploy done!")

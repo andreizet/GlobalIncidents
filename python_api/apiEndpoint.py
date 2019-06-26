@@ -5,6 +5,7 @@ from api.GetIncidents import GetIncidents
 from api.InsertIncident import InsertIncident
 from api.GetItem import GetItem
 from api.UpdateStatus import UpdateStatus
+from api.GetGroupedDescriptions import GetGroupedDescriptions
 from pyinstrument import Profiler
 from utils.ConfigurationLoader import ConfigurationLoader
 
@@ -19,6 +20,7 @@ api.add_resource(GetIncidents, '/get-incidents')
 api.add_resource(GetItem, '/get-item')
 api.add_resource(InsertIncident, '/insert-incident')
 api.add_resource(UpdateStatus, '/update-status')
+api.add_resource(GetGroupedDescriptions, '/grouped-descriptions')
 
 @app.before_request
 def before_request():

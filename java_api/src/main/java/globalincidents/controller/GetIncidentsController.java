@@ -10,7 +10,7 @@ import utils.Constants;
 import utils.DBConnection;
 
 @RestController
-public class GetIncidentsController extends BaseController{
+public class GetIncidentsController extends BaseController {
   private Integer mLimit = (Integer)Constants.API_LIMIT.getDefault();
   private String mFilter = (String)Constants.API_FILTER.getDefault();
   private double mMinLat = (Double) Constants.API_MIN_LAT.getDefault();
