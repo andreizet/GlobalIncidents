@@ -23,7 +23,7 @@ class GetIncidents(BaseApiCall):
         self.min_lng = ApiUtils.get_param(request.args, Constants.API_MIN_LNG)
         self.max_lng = ApiUtils.get_param(request.args, Constants.API_MAX_LNG)
 
-    def get_results(self):
+    def run(self):
         start = time.time()
         limit_clause = ""
         if self.limit is not None:

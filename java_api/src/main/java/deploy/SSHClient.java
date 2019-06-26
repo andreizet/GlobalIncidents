@@ -49,7 +49,7 @@ public class SSHClient {
 
   public String ExecuteCommand(String aCommand) throws IOException, JSchException
   {
-    System.out.println("Execute " + aCommand + " on " + mAddress);
+    mLogger.info("Execute " + aCommand + " on " + mAddress);
 
     StringBuilder sb = new StringBuilder();
 

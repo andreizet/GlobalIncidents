@@ -24,7 +24,7 @@ try:
     print("Connected")
 
     # Get the latest updates
-    response = connection.execute('cd /home/ubuntu/GlobalIncidents/; git pull --rebase')
+    response = connection.execute('cd /home/ubuntu/GlobalIncidents/; sudo git pull --rebase')
     print('Rebase response: {}'.format(response))
 
     # Kill the running instance

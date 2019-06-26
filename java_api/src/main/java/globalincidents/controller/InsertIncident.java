@@ -3,12 +3,14 @@ package globalincidents.controller;
 import org.json.JSONObject;
 import org.springframework.util.MultiValueMap;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 import utils.ApiUtils;
 import utils.Constants;
 import utils.DBConnection;
 
+@RequestMapping(value = "/insert-incident")
 @RestController
 public class InsertIncident extends BaseController{
   private String mTitle = (String) Constants.API_TITLE.getDefault();
@@ -18,13 +20,7 @@ public class InsertIncident extends BaseController{
   private int mPriority = (Integer) Constants.API_PRIORITY.getDefault();
 
   @Override
-  @GetMapping("/insert-incident")
-  public String execute(@RequestParam MultiValueMap<String,String> params) {
-    return super.execute(params);
-  }
-
-  @Override
-  public String getResults(@RequestParam MultiValueMap<String,String> params) {
+  public String run(@RequestParam MultiValueMap<String,String> params) {
     if(this.mTitle == null || this.mDescription == null || mLat == -1 || mLng == -1)
     {
       JSONObject obj = new JSONObject();

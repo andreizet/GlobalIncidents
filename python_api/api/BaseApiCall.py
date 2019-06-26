@@ -6,7 +6,7 @@ class BaseApiCall(Resource):
     def get(self):
         start_time = time.time_ns() // 1000000
         self.get_parameters()
-        result = self.get_results()
+        result = self.run()
         stop_time = time.time_ns() // 1000000
 
         print("Time: " + str(stop_time-start_time))
@@ -16,5 +16,5 @@ class BaseApiCall(Resource):
     def get_parameters(self):
         pass
 
-    def get_results(self):
+    def run(self):
         pass

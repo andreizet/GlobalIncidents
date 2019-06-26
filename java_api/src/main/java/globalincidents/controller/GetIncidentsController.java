@@ -3,12 +3,14 @@ package globalincidents.controller;
 import org.json.JSONArray;
 import org.springframework.util.MultiValueMap;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 import utils.ApiUtils;
 import utils.Constants;
 import utils.DBConnection;
 
+@RequestMapping(value = "/get-incidents")
 @RestController
 public class GetIncidentsController extends BaseController {
   private Integer mLimit = (Integer)Constants.API_LIMIT.getDefault();
@@ -19,13 +21,7 @@ public class GetIncidentsController extends BaseController {
   private double mMaxLng = (Double) Constants.API_MAX_LNG.getDefault();
 
   @Override
-  @GetMapping("/get-incidents")
-  public String execute(@RequestParam MultiValueMap<String,String> params) {
-    return super.execute(params);
-  }
-
-  @Override
-  public String getResults(@RequestParam MultiValueMap<String,String> params) {
+  public String run(@RequestParam MultiValueMap<String,String> params) {
     String limitClause = " limit " + this.mLimit;
 
     String filterClause = "";

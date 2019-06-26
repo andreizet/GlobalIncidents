@@ -1,10 +1,12 @@
 package utils
 
 import org.json.JSONObject
+import org.slf4j.LoggerFactory
 import java.io.File
 import java.io.IOException
 
 class ConfigurationLoader {
+    private val mLogger = LoggerFactory.getLogger(ConfigurationLoader::class.java)
 
     var dbName = ""
         private set
@@ -23,7 +25,14 @@ class ConfigurationLoader {
 
     @Throws(Exception::class)
     private fun load(): ConfigurationLoader? {
-        val file = File(System.getProperty("ConfigPath"))
+        val path = System.getProperty("ConfigPath")
+
+        if (path == null) {
+            mLogger.error("Invalid configuration path")
+            System.exit(1)
+        }
+
+        val file = File(path)
         try {
             val content = file.readText()
 
@@ -38,8 +47,7 @@ class ConfigurationLoader {
             this.awsInstance = obj.getString("aws_instance")
         }
         catch(ex: IOException){
-            ex.printStackTrace()
-            println("The configuration file was not found")
+            mLogger.error("The configuration file was not found")
             return null
         }
 
@@ -57,7 +65,8 @@ class ConfigurationLoader {
                         val conf = ConfigurationLoader()
                         mInstance = conf.load()
                     } catch (e: Exception) {
-                        e.printStackTrace()
+                        LoggerFactory.getLogger(ConfigurationLoader::class.java)
+                            .error("The configuration file was not found")
                     }
 
                 }

@@ -1,10 +1,13 @@
 package deploy;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import utils.ConfigurationLoader;
 
 import java.io.File;
 
 public class Deploy {
+  public static Logger mLogger = LoggerFactory.getLogger(Deploy.class);
 
   public static void main(String[] args) throws Exception{
     SSHClient ssh = new SSHClient(ConfigurationLoader.getInstance().getAWSInstance());
@@ -18,16 +21,16 @@ public class Deploy {
 
     if(!uploadResponse)
     {
-      System.out.println("Couldn't upload jar");
+      mLogger.info("Couldn't upload jar");
       return;
     }
 
-    String killResponse = ssh.ExecuteCommand("sudo pkill java");
-    System.out.println("Kill response: " + killResponse);
+    String killResponse = ssh.ExecuteCommand("sudo ps -aux | grep global-incidents-java | awk '{print $2}'");
+    mLogger.info("Kill response: " + killResponse);
 
     String startResponse = ssh.ExecuteCommand("sudo java -jar -DConfigPath=/home/ubuntu/config.json " +
                                               "/home/ubuntu/global-incidents-java.jar > java_output.log &");
-    System.out.println("Start response: " + startResponse);
+    mLogger.info("Start response: " + startResponse);
 
     ssh.Disconnect();
   }

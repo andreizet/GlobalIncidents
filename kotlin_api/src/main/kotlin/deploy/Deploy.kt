@@ -1,9 +1,12 @@
 package deploy
 
+import org.slf4j.LoggerFactory
 import utils.ConfigurationLoader
 import java.io.File
 
 object Deploy {
+
+    private val mLogger = LoggerFactory.getLogger(Deploy::class.java)
 
     @Throws(Exception::class)
     @JvmStatic
@@ -18,16 +21,16 @@ object Deploy {
         val response: Boolean = ssh.UploadFile(jarPath, "/home/ubuntu")
         if(!response)
         {
-            println("Couldn't upload jar")
+            mLogger.error("Couldn't upload jar")
             return
         }
 
-        val responseKill: String = ssh.ExecuteCommand("sudo pkill java")
-        println("Kill response: $responseKill")
+        val responseKill: String = ssh.ExecuteCommand("sudo ps -aux | grep global-incidents-kotlin | awk '{print $2}'")
+        mLogger.info("Kill response: $responseKill")
 
         val responseStart: String = ssh.ExecuteCommand("sudo java -jar -DConfigPath=/home/ubuntu/config.json " +
                                                         "/home/ubuntu/global-incidents-kotlin.jar > kotlin_output.log &")
-        println("Start response: $responseStart")
+        mLogger.info("Start response: $responseStart")
 
         ssh.Disconnect()
     }

@@ -8,7 +8,7 @@ class TestStringMethods(unittest.TestCase):
     def test_get_incidents(self):
         ConfigurationLoader.load('/Volumes/Macintosh HD/_work/GlobalIncidents/config.json')
         incidents = GetIncidents()
-        results = incidents.get_results()
+        results = incidents.run()
 
         self.assertTrue(len(results) > 0)
         self.assertEqual(len(results), 10)

@@ -9,7 +9,7 @@ class GetGroupedDescriptions(BaseApiCall):
     def get_parameters(self):
         pass
 
-    def get_results(self):
+    def run(self):
         results = []
         to_return = dict()
         threads = []

@@ -4,6 +4,7 @@ import org.json.JSONArray;
 import org.json.JSONObject;
 import org.springframework.util.MultiValueMap;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 import utils.DBConnection;
@@ -14,21 +15,16 @@ import java.util.Map;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 
+@RequestMapping(value = "/grouped-descriptions")
 @RestController
 public class GetGroupedDescriptions extends BaseController {
   static final int MAX_THREADS_NO = 5;
-
-  @Override
-  @GetMapping("/grouped-descriptions")
-  public String execute(@RequestParam MultiValueMap<String,String> params) {
-    return super.execute(params);
-  }
 
   /**
    * Challenge: Why is this call returning different values everytime time?
    */
   @Override
-  public String getResults(@RequestParam MultiValueMap<String,String> params) {
+  public String run(@RequestParam MultiValueMap<String,String> params) {
     Map<String, Integer> toReturn = Collections.synchronizedMap(new HashMap<String, Integer>());
 
     JSONArray results = DBConnection.ExecuteQuery("select id, description from incidents");

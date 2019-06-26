@@ -2,6 +2,7 @@ package globalincidents.controller
 
 import org.springframework.util.MultiValueMap
 import org.springframework.web.bind.annotation.GetMapping
+import org.springframework.web.bind.annotation.RequestMapping
 import org.springframework.web.bind.annotation.RequestParam
 import org.springframework.web.bind.annotation.RestController
 import utils.ApiUtils
@@ -9,6 +10,7 @@ import utils.Constants
 import utils.DBConnection
 
 @RestController
+@RequestMapping("/get-incidents")
 class GetIncidentsController: BaseController(){
     internal var mLimit: Any? = Constants.API_LIMIT.getDefault()
     internal var mFilter: Any? = Constants.API_FILTER.getDefault()
@@ -17,10 +19,7 @@ class GetIncidentsController: BaseController(){
     internal var mMinLng: Any? = Constants.API_MIN_LNG.getDefault()
     internal var mMaxLng: Any? = Constants.API_MAX_LNG.getDefault()
 
-    @GetMapping("/get-incidents")
-    override fun execute(@RequestParam params: MultiValueMap<String, String>): String = super.execute(params)
-
-    override fun getResults(@RequestParam params: MultiValueMap<String, String>): String {
+    override fun run(@RequestParam params: MultiValueMap<String, String>): String {
         val limitClause = " limit " + this.mLimit
 
         var filterClause = ""

@@ -13,7 +13,7 @@ class UpdateStatus(BaseApiCall):
         self.id = ApiUtils.get_param(request.args, Constants.API_ID)
         self.status = ApiUtils.get_param(request.args, Constants.API_STATUS)
 
-    def get_results(self):
+    def run(self):
         if self.id is None or self.status is None:
             return {"message": "Some of the mandatory parameters are missing. Please consult our API documentation"}
 

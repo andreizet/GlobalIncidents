@@ -4,24 +4,20 @@ import org.json.JSONArray;
 import org.json.JSONObject;
 import org.springframework.util.MultiValueMap;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 import utils.ApiUtils;
 import utils.Constants;
 import utils.DBConnection;
 
+@RequestMapping(value = "/get-item")
 @RestController
 public class GetItemController extends BaseController{
   private int mId = (Integer) Constants.API_ID.getDefault();
 
   @Override
-  @GetMapping("/get-item")
-  public String execute(@RequestParam MultiValueMap<String,String> params) {
-    return super.execute(params);
-  }
-
-  @Override
-  public String getResults(@RequestParam MultiValueMap<String,String> params) {
+  public String run(@RequestParam MultiValueMap<String,String> params) {
     if(this.mId == -1)
     {
       JSONObject obj = new JSONObject();

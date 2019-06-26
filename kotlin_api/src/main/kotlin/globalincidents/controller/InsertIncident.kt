@@ -3,6 +3,7 @@ package globalincidents.controller
 import org.json.JSONObject
 import org.springframework.util.MultiValueMap
 import org.springframework.web.bind.annotation.GetMapping
+import org.springframework.web.bind.annotation.RequestMapping
 import org.springframework.web.bind.annotation.RequestParam
 import org.springframework.web.bind.annotation.RestController
 import utils.ApiUtils
@@ -10,6 +11,7 @@ import utils.Constants
 import utils.DBConnection
 
 @RestController
+@RequestMapping("/insert-incident")
 class InsertIncident : BaseController() {
     internal var mTitle: Any? = Constants.API_TITLE.getDefault()
     internal var mDescription: Any? = Constants.API_DESCRIPTION.getDefault()
@@ -17,11 +19,7 @@ class InsertIncident : BaseController() {
     internal var mLng: Any? = Constants.API_LNG.getDefault()
     internal var mPriority: Any? = Constants.API_PRIORITY.getDefault()
 
-    @GetMapping("/insert-incident")
-    override fun execute(@RequestParam params: MultiValueMap<String, String>): String = super.execute(params)
-
-    override fun getResults(@RequestParam params: MultiValueMap<String, String>): String {
-        super.execute(params)
+    override fun run(@RequestParam params: MultiValueMap<String, String>): String {
         if (this.mTitle == null || this.mDescription == null || mLat == -1 || mLng == -1)
         {
             val obj = JSONObject()

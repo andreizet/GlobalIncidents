@@ -1,10 +1,14 @@
 package utils;
 
 import org.json.JSONObject;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import java.io.*;
 
 public class ConfigurationLoader {
+  Logger mLogger = LoggerFactory.getLogger(ConfigurationLoader.class);
+
   private static ConfigurationLoader mInstance = null;
 
   private String mDBName = "";
@@ -29,9 +33,17 @@ public class ConfigurationLoader {
     return mInstance;
   }
 
-  private ConfigurationLoader load(){
-    File file = new File(System.getProperty("ConfigPath"));
+  private ConfigurationLoader load() {
+    String path = System.getProperty("ConfigPath");
+
+    if (path == null)
+    {
+      mLogger.error("Invalid configuration path");
+      System.exit(1);
+    }
+
     try {
+      File file = new File(System.getProperty("ConfigPath"));
       BufferedReader br = new BufferedReader(new FileReader(file));
 
       String st;
@@ -50,8 +62,7 @@ public class ConfigurationLoader {
       this.mAWSInstance = obj.getString("aws_instance");
     }
     catch(IOException ex) {
-      ex.printStackTrace();
-      System.out.println("The configuration file was not found");
+      mLogger.error("Error reading configuration file");
       return null;
     }
 

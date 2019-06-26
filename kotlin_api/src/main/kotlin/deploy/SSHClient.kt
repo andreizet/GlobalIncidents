@@ -37,7 +37,7 @@ class SSHClient(private val mAddress: String?) {
 
     @Throws(IOException::class, JSchException::class)
     fun ExecuteCommand(aCommand: String): String {
-        println("Execute $aCommand on $mAddress")
+        mLogger.info("Execute $aCommand on $mAddress")
 
         val sb = StringBuilder()
 
@@ -76,7 +76,7 @@ class SSHClient(private val mAddress: String?) {
             channel.disconnect()
 
         } catch (e: Exception) {
-            e.printStackTrace()
+            mLogger.error(e.message)
         }
 
         mLogger.info("Execution of $aCommand on $mAddress returned $sb")
@@ -106,10 +106,10 @@ class SSHClient(private val mAddress: String?) {
             sftpChannel!!.put(aSource, aDestination, ChannelSftp.OVERWRITE)
             return true
         } catch (e: JSchException) {
-            e.printStackTrace()
+            mLogger.error(e.message)
             return false
         } catch (e1: SftpException) {
-            e1.printStackTrace()
+            mLogger.error(e1.message)
             return false
         }
 

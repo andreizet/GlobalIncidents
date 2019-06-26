@@ -19,7 +19,7 @@ class InsertIncident(BaseApiCall):
         self.lng = ApiUtils.get_param(request.args, Constants.API_LNG)
         self.priority = ApiUtils.get_param(request.args, Constants.API_PRIORITY)
 
-    def get_results(self):
+    def run(self):
         if self.title is None or self.description is None or self.lat is None or self.lng is None or self.priority is None:
             return {"message": "Some of the mandatory parameters are missing. Please consult our API documentation"}
 
