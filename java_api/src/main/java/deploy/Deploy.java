@@ -25,7 +25,7 @@ public class Deploy {
       return;
     }
 
-    String killResponse = ssh.ExecuteCommand("sudo ps -aux | grep global-incidents-java | awk '{print $2}'");
+    String killResponse = ssh.ExecuteCommand("for pid in $(ps -aux | grep global-incidents-kotlin | awk '{print $2}'); do pkill $pid; done");
     mLogger.info("Kill response: " + killResponse);
 
     String startResponse = ssh.ExecuteCommand("sudo java -jar -DConfigPath=/home/ubuntu/config.json " +

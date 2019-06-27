@@ -25,7 +25,7 @@ object Deploy {
             return
         }
 
-        val responseKill: String = ssh.ExecuteCommand("sudo ps -aux | grep global-incidents-kotlin | awk '{print $2}'")
+        val responseKill: String = ssh.ExecuteCommand("for pid in $(ps -aux | grep global-incidents-kotlin | awk '{print $2}'); do pkill \$pid; done")
         mLogger.info("Kill response: $responseKill")
 
         val responseStart: String = ssh.ExecuteCommand("sudo java -jar -DConfigPath=/home/ubuntu/config.json " +
