@@ -6,7 +6,7 @@ from utils.ConfigurationLoader import ConfigurationLoader
 class TestStringMethods(unittest.TestCase):
 
     def test_get_incidents(self):
-        ConfigurationLoader.load('/Volumes/Macintosh HD/_work/GlobalIncidents/config.json')
+        # ConfigurationLoader.load('/Volumes/Macintosh HD/_work/GlobalIncidents/config.json')
         incidents = GetIncidents()
         results = incidents.run()
 

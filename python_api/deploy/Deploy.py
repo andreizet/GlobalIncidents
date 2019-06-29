@@ -1,21 +1,14 @@
 from deploy.SSHConnection import SSHConnection
-import platform, sys, os
 from utils.ConfigurationLoader import ConfigurationLoader
+from unittest import main
 
-
-ConfigurationLoader.load()
+ConfigurationLoader.load('/Volumes/Macintosh HD/_work/GlobalIncidents/config.json')
 USER = ConfigurationLoader.aws_user
 INSTANCE = ConfigurationLoader.aws_instance
 
 key = ConfigurationLoader.aws_key
 
-# Alternatively, the path can be hardcoded like in the following lines, but it is not secure at all:
-# if "Windows" in platform.platform():
-#     key = "C:/secure/aws_ssh"
-# elif "Darwin" in platform.platform():
-#     key = "/Volumes/Macintosh HD/Caphyon/aws_ssh"
-# else:
-#     key = "/home/caphyon/secure/aws_ssh"
+testResult = main(module='test', exit=True)
 
 connection = SSHConnection(INSTANCE, USER, '', key)
 try:
